@@ -28,21 +28,30 @@ public class RewardsService {
     public Integer calculateRewards(Set<UUID> attractionsId, UUID userId) {
         Integer allpoints = 0;
         for (UUID attraction : attractionsId) {
-            allpoints += getAttractionRewardPoints(attraction, userId);
+            allpoints += getAttractionRewardPoints(attraction);
         }
         return allpoints;
     }
 
-    private int getAttractionRewardPoints(UUID attraction, UUID userId) {
+    public Integer calculateAttractionRewards(Set<String> attractionsName) {
+        Integer allpoints = 0;
+        for (String attraction : attractionsName) {
+            allpoints += getAttractionRewardPointsByName(attraction);
+        }
+        return allpoints;
+    }
+    private int getAttractionRewardPointsByName(String attraction) {
         //TODO this method need to be completed in order to get a coherent amount of rewardPoint
         return ThreadLocalRandom.current().nextInt(1, 1000);
     }
 
+    private int getAttractionRewardPoints(UUID attraction) {
+        //TODO this method need to be completed in order to get a coherent amount of rewardPoint
+        return ThreadLocalRandom.current().nextInt(1, 1000);
+    }
 
     public List<Provider> getPrice(TripPricerTask tripPricerTask, double rewards) {
         List<Provider> providers = new ArrayList();
-        HashSet providersUsed = new HashSet();
-
         for (int i = 0; i < 5; ++i) {
             int multiple = ThreadLocalRandom.current().nextInt(100, 700);
             double childrenDiscount = (tripPricerTask.getChildren() / 3);
@@ -90,4 +99,6 @@ public class RewardsService {
                 return "Cure-Your-Blues";
         }
     }
+
+
 }

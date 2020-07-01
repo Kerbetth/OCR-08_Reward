@@ -17,10 +17,6 @@ public class RewardController {
     @Autowired
     RewardsService rewardsService;
 
-    @RequestMapping("/")
-    public String index() {
-        return "Greetings from TourGuide!";
-    }
 /*
     @RequestMapping("/getReward")
     public String getReward(@RequestParam String userName, @RequestParam String attractionName) {
@@ -28,9 +24,14 @@ public class RewardController {
     }*/
 
     @RequestMapping("/calculateRewards")
-    public Integer calculateRewards(@RequestParam Set<UUID> attractions, @RequestParam UUID userId) {
-        return rewardsService.calculateRewards(attractions, userId);
+    public Integer calculateRewards(@RequestParam Set<UUID> attractionsId, @RequestParam UUID userId) {
+        System.out.println(attractionsId+ "  "+userId);
+        return rewardsService.calculateRewards(attractionsId, userId);
     }
 
+    @RequestMapping("/calculateAttractionRewards")
+    public Integer calculateAttractionRewards(@RequestParam Set<String> attractionsName) {
+        return rewardsService.calculateAttractionRewards(attractionsName);
+    }
 
 }
