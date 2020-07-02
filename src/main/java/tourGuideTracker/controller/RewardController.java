@@ -5,10 +5,13 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tourGuideTracker.domain.Provider;
+import tourGuideTracker.domain.TripPricerTask;
 import tourGuideTracker.service.RewardsService;
 
 @RestController
@@ -17,15 +20,8 @@ public class RewardController {
     @Autowired
     RewardsService rewardsService;
 
-/*
-    @RequestMapping("/getReward")
-    public String getReward(@RequestParam String userName, @RequestParam String attractionName) {
-        return rewardsService.calculateRewards(userName);
-    }*/
-
     @RequestMapping("/calculateRewards")
     public Integer calculateRewards(@RequestParam Set<UUID> attractionsId, @RequestParam UUID userId) {
-        System.out.println(attractionsId+ "  "+userId);
         return rewardsService.calculateRewards(attractionsId, userId);
     }
 
@@ -34,4 +30,8 @@ public class RewardController {
         return rewardsService.calculateAttractionRewards(attractionsName);
     }
 
+    @RequestMapping("/getTripDeals")
+    public List<Provider> getTripDeals(@RequestBody TripPricerTask tripPricerTask, @RequestParam double rewards) {
+        return rewardsService.getProviderWithPrice(tripPricerTask, rewards);
+    }
 }

@@ -2,7 +2,6 @@ package tourGuideTracker.service;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 import tourGuideTracker.domain.Provider;
@@ -16,7 +15,7 @@ public class RewardsService {
     private static final String tripPricerApiKey = "test-server-api-key";
 
     public List<Provider> getTripDeals(TripPricerTask tripPricerTask, double cumulatativeRewardPoints) {
-        List<Provider> providers = getPrice(tripPricerTask, cumulatativeRewardPoints);
+        List<Provider> providers = getProviderWithPrice(tripPricerTask, cumulatativeRewardPoints);
         return providers;
     }
 
@@ -50,7 +49,7 @@ public class RewardsService {
         return ThreadLocalRandom.current().nextInt(1, 1000);
     }
 
-    public List<Provider> getPrice(TripPricerTask tripPricerTask, double rewards) {
+    public List<Provider> getProviderWithPrice(TripPricerTask tripPricerTask, double rewards) {
         List<Provider> providers = new ArrayList();
         for (int i = 0; i < 5; ++i) {
             int multiple = ThreadLocalRandom.current().nextInt(100, 700);
@@ -99,6 +98,4 @@ public class RewardsService {
                 return "Cure-Your-Blues";
         }
     }
-
-
 }
