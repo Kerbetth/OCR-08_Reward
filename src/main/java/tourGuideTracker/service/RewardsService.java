@@ -22,16 +22,14 @@ public class RewardsService {
         return providers;
     }
 
-    public UserReward generateUserReward(Attraction attractions, VisitedLocation location) {
-        return new UserReward(location, attractions, getAttractionRewardPoints(attractions.attractionId));
-    }
-
-    public Integer calculateAllUserRewardPoints(List<UserReward> userRewards) {
-        Integer allpoints = 0;
-        for (UserReward userReward : userRewards) {
-            allpoints += userReward.getRewardPoints());
-        }
-        return allpoints;
+    public UserReward generateUserReward(Attraction attractions, UUID userId, double longitude, double latitude) {
+        return new UserReward(
+                new VisitedLocation(
+                        userId,
+                        new Location(longitude, latitude),
+                        new Date()),
+                attractions,
+                getAttractionRewardPoints(attractions.attractionId));
     }
 
     public Integer calculateAttractionRewards(Set<String> attractionsName) {

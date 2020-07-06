@@ -2,6 +2,7 @@ package tourGuideTracker.controller;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,14 +24,13 @@ public class RewardController {
     RewardsService rewardsService;
 
     @RequestMapping("/generateUserReward")
-    public UserReward generateUserReward(@RequestBody Attraction attraction, @RequestBody VisitedLocation visitedLocation) {
-        return rewardsService.generateUserReward(attraction, visitedLocation);
+    public UserReward generateUserReward(@RequestBody Attraction attraction,
+                                         @RequestParam UUID userId,
+                                         @RequestParam double longitude,
+                                         @RequestParam double latitude) {
+        return rewardsService.generateUserReward(attraction, userId, longitude, latitude);
     }
-
-    @RequestMapping("/getCumulativeUserRewardPoints")
-    public int getCumulateRewardPoints(@RequestBody List<UserReward> userRewards) {
-        return rewardsService.calculateAllUserRewardPoints(userRewards);
-    }
+    
     @RequestMapping("/getCumulativeAttractionRewardPoints")
     public int calculateAttractionRewards(@RequestParam Set<String> attractionsName) {
         return rewardsService.calculateAttractionRewards(attractionsName);

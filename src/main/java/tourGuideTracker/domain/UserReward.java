@@ -1,5 +1,7 @@
 package tourGuideTracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import tourGuideTracker.domain.location.Attraction;
 import tourGuideTracker.domain.location.VisitedLocation;
 
@@ -9,15 +11,13 @@ public class UserReward {
     public final Attraction attraction;
     private int rewardPoints;
 
-    public UserReward(VisitedLocation visitedLocation, Attraction attraction, int rewardPoints) {
+    @JsonCreator
+    public UserReward(@JsonProperty("visitedLocation") VisitedLocation visitedLocation,
+                      @JsonProperty("attraction") Attraction attraction,
+                      @JsonProperty("rewardPoints") int rewardPoints) {
         this.visitedLocation = visitedLocation;
         this.attraction = attraction;
         this.rewardPoints = rewardPoints;
-    }
-
-    public UserReward(VisitedLocation visitedLocation, Attraction attraction) {
-        this.visitedLocation = visitedLocation;
-        this.attraction = attraction;
     }
 
     public void setRewardPoints(int rewardPoints) {
