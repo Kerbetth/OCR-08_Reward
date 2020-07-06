@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import tourGuideTracker.domain.Provider;
 import tourGuideTracker.domain.TripPricerTask;
 import tourGuideTracker.domain.UserReward;
+import tourGuideTracker.domain.location.Attraction;
+import tourGuideTracker.domain.location.Location;
+import tourGuideTracker.domain.location.VisitedLocation;
 
 
 @Service
@@ -19,15 +22,14 @@ public class RewardsService {
         return providers;
     }
 
-
-    public Integer cumulatativeRewardPoints(List<UserReward> userRewards){
-        return userRewards.stream().mapToInt(i -> i.getRewardPoints()).sum();
+    public UserReward generateUserReward(Attraction attractions, VisitedLocation location) {
+        return new UserReward(location, attractions, getAttractionRewardPoints(attractions.attractionId));
     }
 
-    public Integer calculateRewards(Set<UUID> attractionsId, UUID userId) {
+    public Integer calculateAllUserRewardPoints(List<UserReward> userRewards) {
         Integer allpoints = 0;
-        for (UUID attraction : attractionsId) {
-            allpoints += getAttractionRewardPoints(attraction);
+        for (UserReward userReward : userRewards) {
+            allpoints += userReward.getRewardPoints());
         }
         return allpoints;
     }
@@ -39,6 +41,8 @@ public class RewardsService {
         }
         return allpoints;
     }
+
+
     private int getAttractionRewardPointsByName(String attraction) {
         //TODO this method need to be completed in order to get a coherent amount of rewardPoint
         return ThreadLocalRandom.current().nextInt(1, 1000);
@@ -98,4 +102,6 @@ public class RewardsService {
                 return "Cure-Your-Blues";
         }
     }
+
+
 }

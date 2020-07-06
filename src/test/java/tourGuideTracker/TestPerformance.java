@@ -89,10 +89,10 @@ public class TestPerformance {
         allUsers = serviceUserProxy.getAllUsers();
         allUsers.forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
 
-        allUsers.forEach(u -> rewardsService.calculateRewards(u));
+        allUsers.forEach(u -> rewardsService.generateUserReward(u));
         for (User user : allUsers) {
             user.addToVisitedLocations(new VisitedLocation(user.getUserId(), attraction, new Date()));
-            rewardsService.calculateRewards(user);
+            rewardsService.generateUserReward(user);
         }
 
         for (User user : allUsers) {
