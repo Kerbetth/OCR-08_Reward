@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
 import tourGuideTracker.domain.Provider;
+import tourGuideTracker.domain.TrackerResponse;
 import tourGuideTracker.domain.TripPricerTask;
 import tourGuideTracker.domain.UserReward;
 import tourGuideTracker.domain.location.Attraction;
@@ -22,14 +23,14 @@ public class RewardsService {
         return providers;
     }
 
-    public UserReward generateUserReward(Attraction attractions, UUID userId, double longitude, double latitude) {
+    public UserReward generateUserReward(TrackerResponse trackerResponse) {
         return new UserReward(
                 new VisitedLocation(
-                        userId,
-                        new Location(longitude, latitude),
+                        trackerResponse.visitedLocation.userId,
+                        trackerResponse.visitedLocation.location,
                         new Date()),
-                attractions,
-                getAttractionRewardPoints(attractions.attractionId));
+                trackerResponse.attraction,
+                getAttractionRewardPoints(trackerResponse.attraction.attractionId));
     }
 
     public Integer calculateAttractionRewards(Set<String> attractionsName) {

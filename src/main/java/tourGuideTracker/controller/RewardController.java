@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tourGuideTracker.domain.Provider;
+import tourGuideTracker.domain.TrackerResponse;
 import tourGuideTracker.domain.TripPricerTask;
 import tourGuideTracker.domain.UserReward;
 import tourGuideTracker.domain.location.Attraction;
@@ -24,11 +25,8 @@ public class RewardController {
     RewardsService rewardsService;
 
     @RequestMapping("/generateUserReward")
-    public UserReward generateUserReward(@RequestBody Attraction attraction,
-                                         @RequestParam UUID userId,
-                                         @RequestParam double longitude,
-                                         @RequestParam double latitude) {
-        return rewardsService.generateUserReward(attraction, userId, longitude, latitude);
+    public UserReward generateUserReward(@RequestBody TrackerResponse trackerResponse) {
+        return rewardsService.generateUserReward(trackerResponse);
     }
     
     @RequestMapping("/getCumulativeAttractionRewardPoints")
