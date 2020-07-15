@@ -1,20 +1,18 @@
-package tourGuideTracker.service;
+package tourGuidePricer.service;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
-import tourGuideTracker.domain.Provider;
-import tourGuideTracker.domain.TrackerResponse;
-import tourGuideTracker.domain.TripPricerTask;
-import tourGuideTracker.domain.UserReward;
-import tourGuideTracker.domain.location.Attraction;
-import tourGuideTracker.domain.location.Location;
-import tourGuideTracker.domain.location.VisitedLocation;
+import tourGuidePricer.domain.Provider;
+import tourGuidePricer.domain.TripPricerTask;
+import tourGuidePricer.domain.UserReward;
+import tourGuidePricer.domain.TrackerResponse;
+import tourGuidePricer.domain.location.VisitedLocation;
 
 
 @Service
-public class RewardsService {
+public class PricerService {
 
     private static final String tripPricerApiKey = "test-server-api-key";
 
@@ -101,6 +99,4 @@ public class RewardsService {
                 return "Cure-Your-Blues";
         }
     }
-
-
 }

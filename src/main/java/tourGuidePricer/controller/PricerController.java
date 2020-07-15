@@ -1,8 +1,7 @@
-package tourGuideTracker.controller;
+package tourGuidePricer.controller;
 
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,32 +9,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import tourGuideTracker.domain.Provider;
-import tourGuideTracker.domain.TrackerResponse;
-import tourGuideTracker.domain.TripPricerTask;
-import tourGuideTracker.domain.UserReward;
-import tourGuideTracker.domain.location.Attraction;
-import tourGuideTracker.domain.location.VisitedLocation;
-import tourGuideTracker.service.RewardsService;
+import tourGuidePricer.domain.Provider;
+import tourGuidePricer.domain.TripPricerTask;
+import tourGuidePricer.domain.UserReward;
+import tourGuidePricer.domain.TrackerResponse;
+import tourGuidePricer.service.PricerService;
 
 @RestController
-public class RewardController {
+public class PricerController {
 
     @Autowired
-    RewardsService rewardsService;
+    PricerService pricerService;
 
     @RequestMapping("/generateUserReward")
     public UserReward generateUserReward(@RequestBody TrackerResponse trackerResponse) {
-        return rewardsService.generateUserReward(trackerResponse);
+        return pricerService.generateUserReward(trackerResponse);
     }
     
     @RequestMapping("/getCumulativeAttractionRewardPoints")
     public int calculateAttractionRewards(@RequestParam Set<String> attractionsName) {
-        return rewardsService.calculateAttractionRewards(attractionsName);
+        return pricerService.calculateAttractionRewards(attractionsName);
     }
 
     @RequestMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestBody TripPricerTask tripPricerTask, @RequestParam double rewards) {
-        return rewardsService.getProviderWithPrice(tripPricerTask, rewards);
+        return pricerService.getProviderWithPrice(tripPricerTask, rewards);
     }
 }
