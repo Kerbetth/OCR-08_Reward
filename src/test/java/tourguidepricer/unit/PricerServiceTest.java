@@ -1,18 +1,18 @@
-package tourGuidePricer.unit;
+package tourguidepricer.unit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import tourGuidePricer.domain.Provider;
-import tourGuidePricer.domain.TrackerResponse;
-import tourGuidePricer.domain.TripPricerTask;
-import tourGuidePricer.domain.UserReward;
-import tourGuidePricer.domain.location.Attraction;
-import tourGuidePricer.domain.location.Location;
-import tourGuidePricer.domain.location.VisitedLocation;
-import tourGuidePricer.service.PricerService;
+import tourguidepricer.domain.Provider;
+import tourguidepricer.domain.TrackerResponse;
+import tourguidepricer.domain.TripPricerTask;
+import tourguidepricer.domain.UserReward;
+import tourguidepricer.domain.location.Attraction;
+import tourguidepricer.domain.location.Location;
+import tourguidepricer.domain.location.VisitedLocation;
+import tourguidepricer.service.PricerService;
 
 import java.util.*;
 
@@ -48,14 +48,11 @@ public class PricerServiceTest {
 
     @Test
     public void calculateAttractionRewards() {
-        Set<String> attractions = new HashSet<>();
-        attractions.add("newAttraction");
-
         //ACT
-        Integer rewards = pricerService.calculateAttractionRewards(attractions);
+        Integer rewards = pricerService.getAttractionRewardPointsByName("newAttraction");
 
         //ASSERT
-        assertThat(rewards).isBetween(1,1000);
+        assertThat(rewards).isBetween(0,1000);
     }
 
     @Test

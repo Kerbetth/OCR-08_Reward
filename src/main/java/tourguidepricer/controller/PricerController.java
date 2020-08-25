@@ -1,4 +1,4 @@
-package tourGuidePricer.controller;
+package tourguidepricer.controller;
 
 import java.util.List;
 import java.util.Set;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import tourGuidePricer.domain.Provider;
-import tourGuidePricer.domain.TripPricerTask;
-import tourGuidePricer.domain.UserReward;
-import tourGuidePricer.domain.TrackerResponse;
-import tourGuidePricer.service.PricerService;
+import tourguidepricer.domain.Provider;
+import tourguidepricer.domain.TripPricerTask;
+import tourguidepricer.domain.UserReward;
+import tourguidepricer.domain.TrackerResponse;
+import tourguidepricer.service.PricerService;
 
 @RestController
 public class PricerController {
@@ -26,9 +26,10 @@ public class PricerController {
         return pricerService.generateUserReward(trackerResponse);
     }
     
-    @RequestMapping("/getCumulativeAttractionRewardPoints")
-    public int calculateAttractionRewards(@RequestParam Set<String> attractionsName) {
-        return pricerService.calculateAttractionRewards(attractionsName);
+    @RequestMapping("/getAttractionRewardPoints")
+    public int calculateAttractionRewards(@RequestParam String attractionName) {
+        System.out.println(attractionName);
+        return pricerService.getAttractionRewardPointsByName(attractionName);
     }
 
     @RequestMapping("/getTripDeals")

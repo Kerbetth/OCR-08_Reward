@@ -1,9 +1,9 @@
-package tourGuidePricer.domain;
+package tourguidepricer.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import tourGuidePricer.domain.location.Attraction;
-import tourGuidePricer.domain.location.VisitedLocation;
+import tourguidepricer.domain.location.Attraction;
+import tourguidepricer.domain.location.VisitedLocation;
 
 public class UserReward {
 
