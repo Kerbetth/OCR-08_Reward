@@ -1,4 +1,4 @@
-package tourGuidePricer.integration;
+package tourguidepricer.integration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,14 +11,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
-import tourGuidePricer.domain.Provider;
-import tourGuidePricer.domain.TrackerResponse;
-import tourGuidePricer.domain.TripPricerTask;
-import tourGuidePricer.domain.UserReward;
-import tourGuidePricer.domain.location.Attraction;
-import tourGuidePricer.domain.location.Location;
-import tourGuidePricer.domain.location.VisitedLocation;
-import tourGuidePricer.service.PricerService;
+import tourguidepricer.domain.Provider;
+import tourguidepricer.domain.TrackerResponse;
+import tourguidepricer.domain.TripPricerTask;
+import tourguidepricer.domain.UserReward;
+import tourguidepricer.domain.location.Attraction;
+import tourguidepricer.domain.location.Location;
+import tourguidepricer.domain.location.VisitedLocation;
+import tourguidepricer.service.PricerService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

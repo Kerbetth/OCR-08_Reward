@@ -1,14 +1,14 @@
-package tourGuidePricer.service;
+package tourguidepricer.service;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
-import tourGuidePricer.domain.Provider;
-import tourGuidePricer.domain.TripPricerTask;
-import tourGuidePricer.domain.UserReward;
-import tourGuidePricer.domain.TrackerResponse;
-import tourGuidePricer.domain.location.VisitedLocation;
+import tourguidepricer.domain.Provider;
+import tourguidepricer.domain.TripPricerTask;
+import tourguidepricer.domain.UserReward;
+import tourguidepricer.domain.TrackerResponse;
+import tourguidepricer.domain.location.VisitedLocation;
 
 
 @Service
@@ -31,16 +31,7 @@ public class PricerService {
                 getAttractionRewardPoints(trackerResponse.attraction.attractionId));
     }
 
-    public Integer calculateAttractionRewards(Set<String> attractionsName) {
-        Integer allpoints = 0;
-        for (String attraction : attractionsName) {
-            allpoints += getAttractionRewardPointsByName(attraction);
-        }
-        return allpoints;
-    }
-
-
-    private int getAttractionRewardPointsByName(String attraction) {
+    public int getAttractionRewardPointsByName(String attractionsName) {
         //TODO this method need to be completed in order to get a coherent amount of rewardPoint
         return ThreadLocalRandom.current().nextInt(1, 1000);
     }
