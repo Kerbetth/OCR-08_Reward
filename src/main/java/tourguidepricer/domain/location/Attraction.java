@@ -1,4 +1,4 @@
-package tourGuidePricer.domain.location;
+package tourguidepricer.domain.location;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package tourGuidePricer.unit;
+package tourguidepricer.unit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,12 +9,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import tourGuidePricer.controller.PricerController;
-import tourGuidePricer.domain.TrackerResponse;
-import tourGuidePricer.domain.TripPricerTask;
-import tourGuidePricer.domain.location.Attraction;
-import tourGuidePricer.domain.location.Location;
-import tourGuidePricer.domain.location.VisitedLocation;
+import tourguidepricer.controller.PricerController;
+import tourguidepricer.domain.TrackerResponse;
+import tourguidepricer.domain.TripPricerTask;
+import tourguidepricer.domain.location.Attraction;
+import tourguidepricer.domain.location.Location;
+import tourguidepricer.domain.location.VisitedLocation;
 
 import java.util.*;
 
