@@ -3,16 +3,21 @@ package tourguidepricer.service;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tourguidepricer.domain.Provider;
 import tourguidepricer.domain.TripPricerTask;
 import tourguidepricer.domain.UserReward;
 import tourguidepricer.domain.TrackerResponse;
 import tourguidepricer.domain.location.VisitedLocation;
+import tourguidepricer.util.ProviderUtil;
 
 
 @Service
 public class PricerService {
+
+    @Autowired
+    ProviderUtil providerUtil;
 
     private static final String tripPricerApiKey = "test-server-api-key";
 
@@ -58,36 +63,10 @@ public class PricerService {
 
             providers.add(new Provider(
                     tripPricerTask.getAttractionId(),
-                    getProviderName(tripPricerTask.getApiKey(), tripPricerTask.getAdults()),
+                    providerUtil.getProviderName(tripPricerTask.getApiKey(), tripPricerTask.getAdults()),
                     price));
         }
-
         return providers;
     }
 
-    public String getProviderName(String apiKey, int adults) {
-        int multiple = ThreadLocalRandom.current().nextInt(1, 10);
-        switch (multiple) {
-            case 1:
-                return "Holiday Travels";
-            case 2:
-                return "Enterprize Ventures Limited";
-            case 3:
-                return "Sunny Days";
-            case 4:
-                return "FlyAway Trips";
-            case 5:
-                return "United Partners Vacations";
-            case 6:
-                return "Dream Trips";
-            case 7:
-                return "Live Free";
-            case 8:
-                return "Dancing Waves Cruselines and Partners";
-            case 9:
-                return "AdventureCo";
-            default:
-                return "Cure-Your-Blues";
-        }
-    }
 }

@@ -54,9 +54,9 @@ public class PricerIT {
         //ARRANGE
         Set<String> attactions = new HashSet<>();
         String rewards =
-                mvc.perform(post("/getCumulativeAttractionRewardPoints")
+                mvc.perform(post("/getAttractionRewardPoints")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("attractionsName", attactions.toString())
+                        .param("attractionName", "anAttraction")
                 )
                         .andExpect(status().isOk())
                         .andReturn().getResponse().getContentAsString();
