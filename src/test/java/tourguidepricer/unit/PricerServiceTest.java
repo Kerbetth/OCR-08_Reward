@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tourguidepricer.domain.Provider;
 import tourguidepricer.domain.TrackerResponse;
@@ -13,23 +14,27 @@ import tourguidepricer.domain.location.Attraction;
 import tourguidepricer.domain.location.Location;
 import tourguidepricer.domain.location.VisitedLocation;
 import tourguidepricer.service.PricerService;
+import tourguidepricer.util.ProviderUtil;
 
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class PricerServiceTest {
 
-
+    @Mock
+    ProviderUtil providerUtil;
     @InjectMocks
     PricerService pricerService = new PricerService();
     TrackerResponse trackerResponse;
 
     @BeforeEach
     void setup() {
-        VisitedLocation visitedLocation = new VisitedLocation(UUID.randomUUID(), new Location(2.0,1.0), new Date());
-        Attraction attraction =new Attraction("manege", "utoya", "sweden", 2.0, 1.0);
+        VisitedLocation visitedLocation = new VisitedLocation(UUID.randomUUID(), new Location(2.0, 1.0), new Date());
+        Attraction attraction = new Attraction("manege", "utoya", "sweden", 2.0, 1.0);
         trackerResponse = new TrackerResponse(visitedLocation, attraction);
     }
 
@@ -52,26 +57,26 @@ public class PricerServiceTest {
         Integer rewards = pricerService.getAttractionRewardPointsByName("newAttraction");
 
         //ASSERT
-        assertThat(rewards).isBetween(0,1000);
+        assertThat(rewards).isBetween(0, 1000);
     }
 
     @Test
     public void getProviderWithPrice() {
-        TripPricerTask tripPricerTask = new TripPricerTask("api",UUID.randomUUID(),1,3,1);
-
+        TripPricerTask tripPricerTask = new TripPricerTask("api", UUID.randomUUID(), 1, 3, 1);
+        when(providerUtil.getProviderName(anyString(),eq(1))).thenReturn("anAgence");
         //ACT
-        List<Provider> providers = pricerService.getProviderWithPrice(tripPricerTask,101);
+        List<Provider> providers = pricerService.getProviderWithPrice(tripPricerTask, 101);
 
         //ASSERT
-        assertThat(providers.get(0).price).isBetween(200.0,3000.0);
+        assertThat(providers.get(0).price).isBetween(200.0, 3000.0);
     }
 
     @Test
     public void getProviderWithPriceFreeWhenLotOfReward() {
-        TripPricerTask tripPricerTask = new TripPricerTask("api",UUID.randomUUID(),1,1,1);
-
+        TripPricerTask tripPricerTask = new TripPricerTask("api", UUID.randomUUID(), 1, 1, 1);
+        when(providerUtil.getProviderName(anyString(),eq(1))).thenReturn("anAgence");
         //ACT
-        List<Provider> providers = pricerService.getProviderWithPrice(tripPricerTask,10000);
+        List<Provider> providers = pricerService.getProviderWithPrice(tripPricerTask, 10000);
 
         //ASSERT
         assertThat(providers.get(0).price).isEqualTo(0);
