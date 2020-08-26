@@ -56,9 +56,8 @@ public class PricerControllerTest {
 
     @Test
     public void get5NearestAttractions() throws Exception {
-        Set<String> attactions = new HashSet<>();
 
-        this.mockMvc.perform(post("/getCumulativeAttractionRewardPoints?attractionsName="+attactions.toString())
+        this.mockMvc.perform(post("/getAttractionRewardPoints?attractionName=AnAttraction")
                 .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isOk());
